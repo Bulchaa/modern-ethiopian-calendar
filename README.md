@@ -191,8 +191,8 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 ### Development Setup
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/modern-calendar-system.git
-cd modern-calendar-system
+git clone https://github.com/Bulchaa/modern-ethiopian-calendar.git
+cd modern-ethiopian-calendar
 
 # Install dependencies
 npm install
@@ -220,7 +220,7 @@ Give a ⭐️ if this project helped you!
 
 ## 🔗 Links
 
-- **Live Demo**: https://Bulchaa.github.io/modern-ethiopian-calendar
+- **Live Demo**: https://oroetcal.qubeteck.com
 - **Documentation**: https://Bulchaa.github.io/modern-ethiopian-calendar/docs
 - **NPM Package**: https://www.npmjs.com/package/modern-calendar-system (Coming Soon)
 
