@@ -1,9 +1,9 @@
 # 🌍 Modern Multi-Language Calendar System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/modern-calendar-system.svg)](https://github.com/yourusername/modern-calendar-system/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/modern-calendar-system.svg)](https://github.com/yourusername/modern-calendar-system/network)
-[![GitHub issues](https://img.shields.io/github/issues/yourusername/modern-calendar-system.svg)](https://github.com/yourusername/modern-calendar-system/issues)
+[![GitHub stars](https://img.shields.io/github/stars/Bulchaa/modern-ethiopian-calendar.svg)](https://github.com/Bulchaa/modern-ethiopian-calendar/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Bulchaa/modern-ethiopian-calendar.svg)](https://github.com/Bulchaa/modern-ethiopian-calendar/network)
+[![GitHub issues](https://img.shields.io/github/issues/Bulchaa/modern-ethiopian-calendar.svg)](https://github.com/Bulchaa/modern-ethiopian-calendar/issues)
 
 A comprehensive, modern calendar system supporting multiple calendar types with beautiful UI across multiple programming languages and frameworks.
 
@@ -71,8 +71,8 @@ echo $calendar->formatDate($calendar->today());
 
 ### Clone Repository
 ```bash
-git clone https://github.com/yourusername/modern-calendar-system.git
-cd modern-calendar-system
+git clone https://github.com/Bulchaa/modern-ethiopian-calendar.git
+cd modern-ethiopian-calendar
 ```
 
 ### NPM (Coming Soon)
@@ -82,8 +82,9 @@ npm install modern-calendar-system
 
 ### CDN (Coming Soon)
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yourusername/modern-calendar-system/css/modern-calendar.css">
-<script src="https://cdn.jsdelivr.net/gh/yourusername/modern-calendar-system/js/modern-calendar.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bulchaa/modern-ethiopian-calendar@main/css/datepicker.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Bulchaa/modern-ethiopian-calendar@main/css/modern-calendar.css">
+<script src="https://cdn.jsdelivr.net/gh/Bulchaa/modern-ethiopian-calendar@main/js/modern-calendar.js"></script>
 ```
 
 ## 🌍 Supported Calendars
@@ -213,14 +214,14 @@ Give a ⭐️ if this project helped you!
 
 ## 📞 Contact
 
-- **GitHub**: [@yourusername](https://github.com/yourusername)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/modern-calendar-system/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/modern-calendar-system/discussions)
+- **GitHub**: [@Bulchaa](https://github.com/Bulchaa)
+- **Issues**: [GitHub Issues](https://github.com/Bulchaa/modern-ethiopian-calendar/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Bulchaa/modern-ethiopian-calendar/discussions)
 
 ## 🔗 Links
 
-- **Live Demo**: https://yourusername.github.io/modern-calendar-system
-- **Documentation**: https://yourusername.github.io/modern-calendar-system/docs
+- **Live Demo**: https://Bulchaa.github.io/modern-ethiopian-calendar
+- **Documentation**: https://Bulchaa.github.io/modern-ethiopian-calendar/docs
 - **NPM Package**: https://www.npmjs.com/package/modern-calendar-system (Coming Soon)
 
 ## 📊 Browser Support
@@ -239,4 +240,4 @@ Give a ⭐️ if this project helped you!
 
 ---
 
-**Made with ❤️ for the global community**
+**Made with qubeteck technology/bulcha abdi for the global community**
