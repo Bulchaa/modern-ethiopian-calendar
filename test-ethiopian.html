@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ethiopian Calendar Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; background: #f0f0f0; }
+        .correct { background: #d4edda; }
+        .incorrect { background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>Ethiopian Calendar Conversion Test</h1>
+    <div id="results"></div>
+    
+    <script>
+        // Ethiopian calendar conversion functions
+        function gregorianToJD(date) {
+            let year = date.getFullYear();
+            let month = date.getMonth() + 1;
+            const day = date.getDate();
+            if (year < 0) year++;
+            if (month < 3) {
+                month += 12;
+                year--;
+            }
+            const a = Math.floor(year / 100);
+            const b = 2 - a + Math.floor(a / 4);
+            return Math.floor(365.25 * (year + 4716)) + Math.floor(30.6001 * (month + 1)) + day + b - 1524.5;
+        }
+        
+        function gregorianToEthiopian(date) {
+            const jdEpoch = 1724220.5;
+            const jd = gregorianToJD(date);
+            const c = Math.floor(jd) + 0.5 - jdEpoch;
+            let year = Math.floor((c - Math.floor((c + 366) / 1461)) / 365) + 1;
+            if (year <= 0) year--;
+            const yearStart = ethiopianToJD(year, 1, 1);
+            const dayOfYear = Math.floor(jd) + 0.5 - yearStart + 1;
+            const month = Math.floor((dayOfYear - 1) / 30) + 1;
+            const day = dayOfYear - (month - 1) * 30;
+            return { year, month, day };
+        }
+        
+        function ethiopianToJD(year, month, day) {
+            const jdEpoch = 1724220.5;
+            if (year < 0) year++;
+            return day + (month - 1) * 30 + (year - 1) * 365 + Math.floor(year / 4) + jdEpoch - 1;
+        }
+        
+        function formatEthiopianDate(ethDate, language = 'am') {
+            const monthNames = {
+                am: ['መስከረም', 'ጥቅምት', 'ኅዳር', 'ታኅሳስ', 'ጥር', 'የካቲት',
+                     'መጋቢት', 'ሚያዝያ', 'ግንቦት', 'ሰኔ', 'ሐምሌ', 'ነሐሴ', 'ጳጉሜ'],
+                oro: ['Fuulbaana', 'Onkolooleessaa', 'Sadaasaa', 'Muddee', 'Ammajjii', 'Gurraandhala',
+                      'Bitooteessaa', 'Ebla', 'Caamsaa', 'Waxabajjii', 'Adoolessa', 'Hagayya', 'Qaamee']
+            };
+            
+            const months = monthNames[language] || monthNames.am;
+            return `${ethDate.day} ${months[ethDate.month - 1]} ${ethDate.year}`;
+        }
+        
+        // Test cases
+        const testCases = [
+            { gregorian: new Date(2017, 5, 12), description: "June 12, 2017 (Your test date)" },
+            { gregorian: new Date(2024, 0, 1), description: "January 1, 2024 (New Year)" },
+            { gregorian: new Date(2023, 8, 11), description: "September 11, 2023 (Ethiopian New Year)" },
+            { gregorian: new Date(2024, 11, 25), description: "December 25, 2024 (Christmas)" }
+        ];
+        
+        const resultsDiv = document.getElementById('results');
+        
+        testCases.forEach((testCase, index) => {
+            const ethDate = gregorianToEthiopian(testCase.gregorian);
+            const amharicDate = formatEthiopianDate(ethDate, 'am');
+            const oromoDate = formatEthiopianDate(ethDate, 'oro');
+            
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'test-result';
+            resultDiv.innerHTML = `
+                <h3>Test ${index + 1}: ${testCase.description}</h3>
+                <p><strong>Gregorian:</strong> ${testCase.gregorian.toLocaleDateString()}</p>
+                <p><strong>Ethiopian (Amharic):</strong> ${amharicDate}</p>
+                <p><strong>Ethiopian (Oromo):</strong> ${oromoDate}</p>
+                <p><strong>Raw Ethiopian:</strong> ${ethDate.year}/${ethDate.month}/${ethDate.day}</p>
+            `;
+            
+            resultsDiv.appendChild(resultDiv);
+        });
+        
+        // Special test for your date
+        const yourDate = new Date(2017, 5, 12); // June 12, 2017
+        const yourEthDate = gregorianToEthiopian(yourDate);
+        console.log('Your date (June 12, 2017) in Ethiopian calendar:', yourEthDate);
+        console.log('Formatted (Amharic):', formatEthiopianDate(yourEthDate, 'am'));
+        console.log('Formatted (Oromo):', formatEthiopianDate(yourEthDate, 'oro'));
+    </script>
+</body>
+</html>

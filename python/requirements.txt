@@ -1,0 +1,35 @@
+# Modern Calendar System - Python Requirements
+
+# Core dependencies
+datetime  # Built-in Python module
+calendar  # Built-in Python module
+
+# Optional dependencies for enhanced functionality
+python-dateutil>=2.8.0  # Better date parsing and manipulation
+pytz>=2021.1            # Timezone support
+babel>=2.9.0            # Internationalization support
+
+# Development dependencies
+pytest>=6.0.0           # Testing framework
+pytest-cov>=2.10.0      # Coverage reporting
+black>=21.0.0           # Code formatting
+flake8>=3.8.0           # Linting
+mypy>=0.812             # Type checking
+
+# Optional GUI dependencies (for desktop applications)
+tkinter  # Built-in Python module for GUI
+PyQt5>=5.15.0           # Alternative GUI framework (optional)
+kivy>=2.0.0             # Cross-platform GUI framework (optional)
+
+# Web framework dependencies (for web applications)
+flask>=2.0.0            # Lightweight web framework (optional)
+django>=3.2.0           # Full-featured web framework (optional)
+fastapi>=0.68.0         # Modern API framework (optional)
+
+# Database dependencies (for data persistence)
+sqlite3  # Built-in Python module
+sqlalchemy>=1.4.0       # ORM (optional)
+
+# Documentation dependencies
+sphinx>=4.0.0           # Documentation generator (optional)
+sphinx-rtd-theme>=0.5.0 # Documentation theme (optional)

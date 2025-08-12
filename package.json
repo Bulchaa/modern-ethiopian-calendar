@@ -1,0 +1,118 @@
+{
+  "name": "modern-calendar-system",
+  "version": "1.0.0",
+  "description": "A comprehensive, modern calendar system supporting multiple calendar types with beautiful UI across multiple programming languages",
+  "main": "js/modern-calendar.js",
+  "scripts": {
+    "start": "http-server . -p 8080",
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "postcss css/modern-calendar.css -o dist/modern-calendar.min.css --use autoprefixer cssnano",
+    "build:js": "webpack --mode production",
+    "dev": "npm run start",
+    "test": "jest",
+    "lint": "eslint js/ react/ nextjs/",
+    "format": "prettier --write \"**/*.{js,jsx,css,md}\"",
+    "demo": "npm run start && open http://localhost:8080/html/"
+  },
+  "keywords": [
+    "calendar",
+    "datepicker",
+    "ethiopian-calendar",
+    "islamic-calendar",
+    "gregorian-calendar",
+    "multi-language",
+    "modern-ui",
+    "responsive",
+    "react",
+    "nextjs",
+    "javascript",
+    "css",
+    "date",
+    "time"
+  ],
+  "author": "Your Name <your.email@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/modern-calendar-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/modern-calendar-system/issues"
+  },
+  "homepage": "https://github.com/your-username/modern-calendar-system#readme",
+  "devDependencies": {
+    "@babel/core": "^7.22.0",
+    "@babel/preset-env": "^7.22.0",
+    "@babel/preset-react": "^7.22.0",
+    "autoprefixer": "^10.4.0",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.8.0",
+    "cssnano": "^6.0.0",
+    "eslint": "^8.42.0",
+    "eslint-plugin-react": "^7.32.0",
+    "http-server": "^14.1.0",
+    "jest": "^29.5.0",
+    "postcss": "^8.4.0",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^2.8.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.88.0",
+    "webpack-cli": "^5.1.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "files": [
+    "css/",
+    "js/",
+    "react/",
+    "nextjs/",
+    "docs/",
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "rules": {
+      "no-console": "warn",
+      "no-unused-vars": "error"
+    }
+  },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 80,
+    "tabWidth": 2
+  }
+}

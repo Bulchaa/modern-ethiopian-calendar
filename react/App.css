@@ -1,0 +1,146 @@
+/* React App Styles */
+.app {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-header {
+  text-align: center;
+  color: white;
+  margin-bottom: 40px;
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  margin: 0;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.app-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin: 10px 0;
+}
+
+.controls-panel {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-group label {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.control-group select {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.control-group select:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.control-group select option {
+  background: #2c3e50;
+  color: white;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.demo-section {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 20px;
+  color: white;
+}
+
+.demo-section h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.selected-date-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.selected-date-info h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+}
+
+.theme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.theme-item {
+  text-align: center;
+}
+
+.theme-item h4 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* Import the main calendar styles */
+@import '../css/modern-calendar.css';
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+  
+  .app-header h1 {
+    font-size: 2rem;
+  }
+  
+  .demo-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .controls-panel {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .theme-grid {
+    grid-template-columns: 1fr;
+  }
+}

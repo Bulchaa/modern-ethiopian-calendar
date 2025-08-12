@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calendar DatePicker Demo</title>
+    <link rel="stylesheet" href="css/modern-calendar.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .demo-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .demo-section h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        
+        .code-example {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .result-display {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📅 Modern Calendar DatePicker</h1>
+            <p>Complete examples of using calendars as input field datepickers</p>
+        </div>
+
+        <!-- Basic DatePicker -->
+        <div class="demo-section">
+            <h3>1. Basic DatePicker</h3>
+            <div class="form-group">
+                <label class="form-label">Select Date:</label>
+                <input type="text" id="basic-datepicker" placeholder="Click to select date...">
+            </div>
+            
+            <div class="code-example">
+&lt;input type="text" id="basic-datepicker"&gt;
+&lt;script&gt;
+  new ModernDatePicker('#basic-datepicker');
+&lt;/script&gt;
+            </div>
+            <div class="result-display" id="basic-result">Selected: None</div>
+        </div>
+
+        <!-- Ethiopian DatePicker -->
+        <div class="demo-section">
+            <h3>2. Ethiopian Calendar DatePicker</h3>
+            <div class="form-group ethiopian-datepicker">
+                <label class="form-label">የኢትዮጵያ ዘመን አቆጣጠር:</label>
+                <input type="text" id="ethiopian-datepicker" placeholder="ቀን ይምረጡ...">
+            </div>
+            
+            <div class="code-example">
+&lt;input type="text" id="ethiopian-datepicker"&gt;
+&lt;script&gt;
+  new ModernDatePicker('#ethiopian-datepicker', {
+    calendar: 'ethiopian',
+    language: 'am',
+    theme: 'green'
+  });
+&lt;/script&gt;
+            </div>
+            <div class="result-display" id="ethiopian-result">Selected: None</div>
+        </div>
+
+        <!-- Auto-Initialize DatePicker -->
+        <div class="demo-section">
+            <h3>3. Auto-Initialize with Data Attributes</h3>
+            <div class="form-group">
+                <label class="form-label">Auto DatePicker:</label>
+                <input type="text" 
+                       data-datepicker='{"calendar":"gregorian","theme":"purple","format":"dd/mm/yyyy"}'
+                       placeholder="Auto-initialized datepicker">
+            </div>
+            
+            <div class="code-example">
+&lt;input type="text" 
+       data-datepicker='{"calendar":"gregorian","theme":"purple","format":"dd/mm/yyyy"}'
+       placeholder="Auto-initialized datepicker"&gt;
+            </div>
+        </div>
+
+        <!-- Date Range Picker -->
+        <div class="demo-section">
+            <h3>4. Date Range Picker</h3>
+            <div class="form-group">
+                <label class="form-label">Select Date Range:</label>
+                <div class="daterange-picker">
+                    <input type="text" id="start-date" placeholder="Start date">
+                    <span class="daterange-separator">to</span>
+                    <input type="text" id="end-date" placeholder="End date">
+                </div>
+            </div>
+            
+            <div class="code-example">
+const startPicker = new ModernDatePicker('#start-date', {
+  onSelect: (date) => {
+    endPicker.calendar.options.minDate = date;
+  }
+});
+
+const endPicker = new ModernDatePicker('#end-date', {
+  onSelect: (date) => {
+    startPicker.calendar.options.maxDate = date;
+  }
+});
+            </div>
+            <div class="result-display" id="range-result">Range: None selected</div>
+        </div>
+
+        <!-- Form Integration -->
+        <div class="demo-section">
+            <h3>5. Form Integration</h3>
+            <form id="demo-form">
+                <div class="form-row">
+                    <div class="form-col">
+                        <label class="form-label">Birth Date:</label>
+                        <input type="text" name="birthdate" id="birth-date" required>
+                    </div>
+                    <div class="form-col">
+                        <label class="form-label">Join Date:</label>
+                        <input type="text" name="joindate" id="join-date" required>
+                    </div>
+                </div>
+                <button type="submit" style="background: #667eea; color: white; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer; margin-top: 20px;">Submit Form</button>
+            </form>
+            
+            <div class="code-example">
+&lt;form id="demo-form"&gt;
+  &lt;input type="text" name="birthdate" id="birth-date" required&gt;
+  &lt;input type="text" name="joindate" id="join-date" required&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+  new ModernDatePicker('#birth-date', {
+    format: 'yyyy-mm-dd',
+    onSelect: (date) => console.log('Birth date:', date)
+  });
+  
+  new ModernDatePicker('#join-date', {
+    format: 'yyyy-mm-dd',
+    onSelect: (date) => console.log('Join date:', date)
+  });
+&lt;/script&gt;
+            </div>
+            <div class="result-display" id="form-result">Form data will appear here</div>
+        </div>
+
+        <!-- Programmatic Control -->
+        <div class="demo-section">
+            <h3>6. Programmatic Control</h3>
+            <div class="form-group">
+                <label class="form-label">Controlled DatePicker:</label>
+                <input type="text" id="controlled-datepicker" placeholder="Programmatically controlled">
+            </div>
+            
+            <div style="margin: 15px 0; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="setToday()" style="background: #27ae60; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">Set Today</button>
+                <button onclick="setCustomDate()" style="background: #e74c3c; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">Set Custom Date</button>
+                <button onclick="clearDate()" style="background: #95a5a6; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">Clear</button>
+                <button onclick="getValue()" style="background: #3498db; color: white; padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer;">Get Value</button>
+            </div>
+            
+            <div class="code-example">
+const controlledPicker = new ModernDatePicker('#controlled-datepicker');
+
+// Set today's date
+controlledPicker.setValue(new Date());
+
+// Set custom date
+controlledPicker.setValue('2024-12-25');
+
+// Get current value
+const value = controlledPicker.getValue();
+const date = controlledPicker.getDate();
+            </div>
+            <div class="result-display" id="controlled-result">Value: None</div>
+        </div>
+    </div>
+
+    <script src="js/modern-calendar.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script>
+        // Initialize datepickers
+        const basicPicker = new ModernDatePicker('#basic-datepicker', {
+            onSelect: (date, formatted) => {
+                document.getElementById('basic-result').textContent = `Selected: ${formatted}`;
+            }
+        });
+
+        const ethiopianPicker = new ModernDatePicker('#ethiopian-datepicker', {
+            calendar: 'ethiopian',
+            language: 'am',
+            theme: 'green',
+            onSelect: (date, formatted) => {
+                document.getElementById('ethiopian-result').textContent = `Selected: ${formatted}`;
+            }
+        });
+
+        // Date range picker
+        const startPicker = new ModernDatePicker('#start-date', {
+            onSelect: (date, formatted) => {
+                updateRangeResult();
+            }
+        });
+
+        const endPicker = new ModernDatePicker('#end-date', {
+            onSelect: (date, formatted) => {
+                updateRangeResult();
+            }
+        });
+
+        function updateRangeResult() {
+            const start = startPicker.getValue();
+            const end = endPicker.getValue();
+            document.getElementById('range-result').textContent = 
+                `Range: ${start || 'None'} to ${end || 'None'}`;
+        }
+
+        // Form integration
+        new ModernDatePicker('#birth-date', {
+            format: 'yyyy-mm-dd'
+        });
+
+        new ModernDatePicker('#join-date', {
+            format: 'yyyy-mm-dd'
+        });
+
+        document.getElementById('demo-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            document.getElementById('form-result').innerHTML = 
+                `Form Data: <pre>${JSON.stringify(data, null, 2)}</pre>`;
+        });
+
+        // Programmatic control
+        const controlledPicker = new ModernDatePicker('#controlled-datepicker', {
+            onSelect: (date, formatted) => {
+                document.getElementById('controlled-result').textContent = `Value: ${formatted}`;
+            }
+        });
+
+        function setToday() {
+            controlledPicker.setValue(new Date());
+        }
+
+        function setCustomDate() {
+            controlledPicker.setValue('2024-12-25');
+        }
+
+        function clearDate() {
+            controlledPicker.input.value = '';
+            document.getElementById('controlled-result').textContent = 'Value: None';
+        }
+
+        function getValue() {
+            const value = controlledPicker.getValue();
+            const date = controlledPicker.getDate();
+            alert(`Value: ${value}\nDate Object: ${date}`);
+        }
+    </script>
+</body>
+</html>

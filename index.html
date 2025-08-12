@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Multi-Language Calendar System</title>
+    <link rel="stylesheet" href="css/modern-calendar.css">
+    <link rel="stylesheet" href="css/datepicker.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 60px;
+            color: #2c3e50;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .features {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .datepicker-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .datepicker-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .datepicker-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .datepicker-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #f093fb;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .output-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            min-height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .demo-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .control-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .code-section {
+            padding: 100px 0;
+            background: #2d3748;
+            color: white;
+        }
+
+        .code-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .code-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-card h3 {
+            color: #4facfe;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .code-block {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            border-left: 4px solid #4facfe;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .demo-grid, .datepicker-grid, .code-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🌍 Modern Calendar System</h1>
+            <p>Beautiful multi-language calendar with Ethiopian, Gregorian & Islamic support</p>
+            <p style="font-size: 1.2rem; margin-bottom: 40px;">Complete DatePicker integration for forms and applications</p>
+            
+            <div class="cta-buttons">
+                <a href="html/datepicker-guide.html" class="btn btn-primary">📅 DatePicker Guide</a>
+                <a href="docs/DEVELOPER_GUIDE.md" class="btn btn-secondary">📖 Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>DatePicker Integration</h3>
+                    <p>Complete form integration with input fields. Perfect for forms, validation, and user input with multi-calendar support.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🇪🇹</div>
+                    <h3>Ethiopian Calendar</h3>
+                    <p>Accurate Ethiopian calendar with proper Julian Day conversion. Supports all 13 months including Pagume with correct leap years.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>Multi-Calendar</h3>
+                    <p>Gregorian, Ethiopian, and Islamic calendars with accurate date conversion and proper display formatting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🗣️</div>
+                    <h3>Multi-Language</h3>
+                    <p>English, Amharic (አማርኛ), and Afaan Oromo support with proper month names, day names, and date formatting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Beautiful Themes</h3>
+                    <p>6 modern themes with gradients, animations, and responsive design. Perfect for any application or website.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3>Multi-Platform</h3>
+                    <p>HTML/JS, React, Next.js, Python, PHP implementations with consistent APIs and DatePicker functionality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="datepicker-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">📅 DatePicker Functionality</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px; opacity: 0.9;">
+                Experience the power of our DatePicker with different calendar systems and languages
+            </p>
+            
+            <div class="datepicker-grid">
+                <div class="datepicker-card">
+                    <h3>🌍 Gregorian DatePicker</h3>
+                    <div class="form-group">
+                        <label>Select Date:</label>
+                        <input type="text" id="gregorian-picker" placeholder="Select Gregorian date...">
+                    </div>
+                    <div id="gregorian-output" class="output-display">
+                        Select a date to see details...
+                    </div>
+                </div>
+                
+                <div class="datepicker-card">
+                    <h3>🇪🇹 Ethiopian DatePicker (አማርኛ)</h3>
+                    <div class="form-group">
+                        <label>ቀን ይምረጡ:</label>
+                        <input type="text" id="ethiopian-picker" placeholder="የኢትዮጵያ ቀን ይምረጡ...">
+                    </div>
+                    <div id="ethiopian-output" class="output-display">
+                        የኢትዮጵያ ቀን ይምረጡ...
+                    </div>
+                </div>
+                
+                <div class="datepicker-card">
+                    <h3>🇪🇹 Ethiopian DatePicker (Afaan Oromo)</h3>
+                    <div class="form-group">
+                        <label>Guyyaa Filadhu:</label>
+                        <input type="text" id="oromo-picker" placeholder="Guyyaa Itoophiyaa filadhu...">
+                    </div>
+                    <div id="oromo-output" class="output-display">
+                        Guyyaa filadhu...
+                    </div>
+                </div>
+                
+                <div class="datepicker-card">
+                    <h3>🌙 Islamic DatePicker</h3>
+                    <div class="form-group">
+                        <label>Islamic Date:</label>
+                        <input type="text" id="islamic-picker" placeholder="Select Islamic date...">
+                    </div>
+                    <div id="islamic-output" class="output-display">
+                        Select Islamic date...
+                    </div>
+                </div>
+                
+                <div class="datepicker-card">
+                    <h3>⚡ Auto-Initialize</h3>
+                    <div class="form-group">
+                        <label>Data Attribute Picker:</label>
+                        <input type="text" data-datepicker='{"calendar":"ethiopian","language":"am","theme":"green"}' placeholder="Auto Ethiopian picker...">
+                    </div>
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
+                        Uses data-datepicker attribute for automatic initialization
+                    </p>
+                </div>
+                
+                <div class="datepicker-card">
+                    <h3>📋 Form Integration</h3>
+                    <form id="demo-form" style="display: grid; gap: 15px;">
+                        <div class="form-group">
+                            <label>Birth Date:</label>
+                            <input type="text" name="birth_date" id="birth-picker" placeholder="Select birth date..." required>
+                        </div>
+                        <div class="form-group">
+                            <label>Name:</label>
+                            <input type="text" name="name" placeholder="Enter name..." style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: white;">
+                        </div>
+                        <button type="submit" style="background: linear-gradient(45deg, #4facfe, #00f2fe); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer;">
+                            Submit Form
+                        </button>
+                    </form>
+                    <div id="form-result" class="output-display" style="margin-top: 15px;">
+                        Form results will appear here...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo">
+        <div class="container">
+            <h2 class="section-title">🚀 Live Calendar Demo</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h3>🇪🇹 Ethiopian Calendar</h3>
+                    <div id="ethiopian-calendar"></div>
+                    <div class="controls">
+                        <button class="control-btn" onclick="changeEthTheme('green')">Green</button>
+                        <button class="control-btn" onclick="changeEthTheme('purple')">Purple</button>
+                        <button class="control-btn" onclick="changeEthTheme('orange')">Orange</button>
+                    </div>
+                </div>
+                
+                <div class="demo-card">
+                    <h3>🌍 Gregorian Calendar</h3>
+                    <div id="gregorian-calendar"></div>
+                    <div class="controls">
+                        <button class="control-btn" onclick="changeGregTheme('modern')">Modern</button>
+                        <button class="control-btn" onclick="changeGregTheme('dark')">Dark</button>
+                        <button class="control-btn" onclick="changeGregTheme('ocean')">Ocean</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="code-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">💻 Multi-Platform DatePicker</h2>
+            <div class="code-grid">
+                <div class="code-card">
+                    <h3>HTML/JavaScript</h3>
+                    <div class="code-block">
+&lt;input type="text" id="datepicker"&gt;
+&lt;script&gt;
+new ModernDatePicker('#datepicker', {
+  calendar: 'ethiopian',
+  language: 'am',
+  theme: 'green',
+  onSelect: (date, formatted) =&gt; {
+    console.log('Selected:', formatted);
+  }
+});
+&lt;/script&gt;
+                    </div>
+                </div>
+                
+                <div class="code-card">
+                    <h3>React</h3>
+                    <div class="code-block">
+import { ModernDatePicker } from './ModernDatePicker';
+
+function MyForm() {
+  return (
+    &lt;ModernDatePicker
+      calendar="ethiopian"
+      language="am"
+      theme="green"
+      onSelect={(date) =&gt; setDate(date)}
+    /&gt;
+  );
+}
+                    </div>
+                </div>
+                
+                <div class="code-card">
+                    <h3>Python</h3>
+                    <div class="code-block">
+from modern_calendar import DatePicker
+
+picker = DatePicker('ethiopian', 'am')
+selected_date = picker.show_dialog()
+formatted = picker.format_date(selected_date)
+print(f"Selected: {formatted}")
+                    </div>
+                </div>
+                
+                <div class="code-card">
+                    <h3>PHP</h3>
+                    <div class="code-block">
+&lt;?php
+$picker = new ModernDatePicker([
+    'calendar' =&gt; 'ethiopian',
+    'language' =&gt; 'am',
+    'theme' =&gt; 'green'
+]);
+
+echo $picker-&gt;render('birth_date');
+?&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/modern-calendar.js"></script>
+    <script src="js/datepicker.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize calendars
+            const ethiopianCal = new ModernCalendar('#ethiopian-calendar', {
+                calendar: 'ethiopian',
+                language: 'am',
+                theme: 'green'
+            });
+            
+            const gregorianCal = new ModernCalendar('#gregorian-calendar', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'modern'
+            });
+            
+            // Initialize DatePickers
+            new ModernDatePicker('#gregorian-picker', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'modern',
+                onSelect: function(date, formatted) {
+                    document.getElementById('gregorian-output').innerHTML = `
+                        <strong>Selected:</strong> ${formatted}<br>
+                        <strong>Full Date:</strong> ${date.toLocaleDateString('en-US', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})}
+                    `;
+                }
+            });
+            
+            new ModernDatePicker('#ethiopian-picker', {
+                calendar: 'ethiopian',
+                language: 'am',
+                theme: 'green',
+                onSelect: function(date, formatted) {
+                    const ethDate = this.calendar.gregorianToEthiopian(date);
+                    document.getElementById('ethiopian-output').innerHTML = `
+                        <strong>የተመረጠ ቀን:</strong> ${formatted}<br>
+                        <strong>የኢትዮጵያ ዓመት:</strong> ${ethDate.year}<br>
+                        <strong>ወር:</strong> ${ethDate.month} | <strong>ቀን:</strong> ${ethDate.day}
+                    `;
+                }
+            });
+            
+            new ModernDatePicker('#oromo-picker', {
+                calendar: 'ethiopian',
+                language: 'oro',
+                theme: 'orange',
+                onSelect: function(date, formatted) {
+                    document.getElementById('oromo-output').innerHTML = `
+                        <strong>Guyyaa Filatame:</strong> ${formatted}<br>
+                        <strong>Guyyaa Gregorian:</strong> ${date.toLocaleDateString('en-US')}
+                    `;
+                }
+            });
+            
+            new ModernDatePicker('#islamic-picker', {
+                calendar: 'islamic',
+                language: 'en',
+                theme: 'purple',
+                onSelect: function(date, formatted) {
+                    document.getElementById('islamic-output').innerHTML = `
+                        <strong>Islamic Date:</strong> ${formatted}<br>
+                        <strong>Gregorian:</strong> ${date.toLocaleDateString('en-US')}
+                    `;
+                }
+            });
+            
+            new ModernDatePicker('#birth-picker', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'modern'
+            });
+            
+            // Form handling
+            document.getElementById('demo-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                let result = '<strong>Form Data:</strong><br>';
+                for (let [key, value] of formData.entries()) {
+                    result += `${key}: ${value}<br>`;
+                }
+                document.getElementById('form-result').innerHTML = result;
+            });
+            
+            // Set test date
+            setTimeout(() => {
+                const testDate = new Date(2017, 5, 12);
+                ethiopianCal.setDate(testDate);
+                gregorianCal.setDate(testDate);
+            }, 500);
+        });
+        
+        function changeEthTheme(theme) {
+            document.querySelector('#ethiopian-calendar').parentElement.querySelector('.modern-calendar').className = `modern-calendar theme-${theme} calendar-animate`;
+        }
+        
+        function changeGregTheme(theme) {
+            document.querySelector('#gregorian-calendar').parentElement.querySelector('.modern-calendar').className = `modern-calendar theme-${theme} calendar-animate`;
+        }
+    </script>
+</body>
+</html>

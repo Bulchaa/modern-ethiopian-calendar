@@ -1,0 +1,146 @@
+/* Modern DatePicker Styles */
+
+.datepicker-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.modern-datepicker-input {
+  width: 100%;
+  padding: 12px 45px 12px 15px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modern-datepicker-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.modern-datepicker-input:hover {
+  border-color: #667eea;
+}
+
+.datepicker-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.datepicker-icon:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.datepicker-popup {
+  position: absolute;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.datepicker-popup.datepicker-show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Form Integration Styles */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+}
+
+.form-col {
+  flex: 1;
+}
+
+/* Ethiopian DatePicker Specific */
+.ethiopian-datepicker .modern-datepicker-input {
+  border-color: #11998e;
+}
+
+.ethiopian-datepicker .modern-datepicker-input:focus {
+  border-color: #11998e;
+  box-shadow: 0 0 0 3px rgba(17, 153, 142, 0.1);
+}
+
+.ethiopian-datepicker .datepicker-icon {
+  color: #11998e;
+}
+
+/* Range DatePicker */
+.daterange-picker {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.daterange-separator {
+  font-weight: bold;
+  color: #666;
+  padding: 0 5px;
+}
+
+/* Validation States */
+.datepicker-wrapper.error .modern-datepicker-input {
+  border-color: #e74c3c;
+}
+
+.datepicker-wrapper.success .modern-datepicker-input {
+  border-color: #27ae60;
+}
+
+.datepicker-error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .datepicker-popup {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 90vw;
+    max-width: 400px;
+  }
+  
+  .datepicker-popup.datepicker-show {
+    transform: translate(-50%, -50%) !important;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

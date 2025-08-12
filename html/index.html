@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calendar System - HTML Demo</title>
+    <link rel="stylesheet" href="../css/modern-calendar.css">
+    <link rel="stylesheet" href="../css/datepicker.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 10px 0;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .demo-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+        }
+        
+        .demo-section h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .date-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Modern Calendar System</h1>
+            <p>Multi-language calendar with beautiful, modern UI</p>
+            <p>Supports Ethiopian, Gregorian, and Islamic calendars</p>
+        </div>
+        
+        <div class="demo-grid">
+            <div class="demo-section">
+                <h3>📅 Main Calendar</h3>
+                <div id="main-calendar"></div>
+                <div class="controls">
+                    <button class="control-btn" onclick="changeTheme('modern')">Modern</button>
+                    <button class="control-btn" onclick="changeTheme('dark')">Dark</button>
+                    <button class="control-btn" onclick="changeTheme('green')">Green</button>
+                    <button class="control-btn" onclick="changeTheme('purple')">Purple</button>
+                    <select class="control-btn" onchange="changeLanguage(this.value)">
+                        <option value="en">English</option>
+                        <option value="am">አማርኛ</option>
+                        <option value="oro">Afaan Oromo</option>
+                    </select>
+                </div>
+                <div id="selected-date-info" class="date-info">
+                    Select a date to see details
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h3>🇪🇹 Ethiopian Calendar</h3>
+                <div id="ethiopian-calendar"></div>
+                <div id="ethiopian-date-display"></div>
+            </div>
+            
+            <div class="demo-section">
+                <h3>📊 Date Display Components</h3>
+                <div id="date-display-1"></div>
+                <div id="date-display-2"></div>
+                <div class="controls">
+                    <button class="control-btn" onclick="updateDisplays()">Update to Today</button>
+                    <button class="control-btn" onclick="toggleCalendarType()">Toggle Calendar Type</button>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h3>🎨 Theme Showcase</h3>
+                <div id="theme-calendar"></div>
+                <div class="controls">
+                    <button class="control-btn" onclick="cycleThemes()">Cycle Themes</button>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h3>📝 DatePicker Forms</h3>
+                <div style="display: grid; gap: 15px;">
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; color: white;">Gregorian Date:</label>
+                        <input type="text" id="gregorian-picker" placeholder="Select Gregorian date...">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; color: white;">Ethiopian Date:</label>
+                        <input type="text" id="ethiopian-picker" placeholder="Select Ethiopian date...">
+                    </div>
+                    <div>
+                        <label style="display: block; margin-bottom: 5px; color: white;">Islamic Date:</label>
+                        <input type="text" id="islamic-picker" placeholder="Select Islamic date...">
+                    </div>
+                    <div id="form-output" style="background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 10px; color: white; min-height: 40px;">
+                        Selected dates will appear here...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/modern-calendar.js"></script>
+    <script src="../js/datepicker.js"></script>
+    <script>
+        // Initialize calendars
+        let mainCalendar, ethiopianCalendar, themeCalendar;
+        let dateDisplay1, dateDisplay2, ethiopianDateDisplay;
+        let currentThemeIndex = 0;
+        const themes = ['modern', 'dark', 'green', 'purple', 'orange'];
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Main calendar
+            mainCalendar = new ModernCalendar('#main-calendar', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'modern',
+                onDateSelect: function(date) {
+                    document.getElementById('selected-date-info').innerHTML = `
+                        <strong>Selected Date:</strong><br>
+                        ${date.toLocaleDateString('en-US', { 
+                            weekday: 'long', 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                        })}
+                    `;
+                }
+            });
+            
+            // Ethiopian calendar
+            ethiopianCalendar = new ModernCalendar('#ethiopian-calendar', {
+                calendar: 'ethiopian',
+                language: 'am',
+                theme: 'green'
+            });
+            
+            // Ethiopian date display
+            ethiopianDateDisplay = new DateDisplay('#ethiopian-date-display', {
+                calendar: 'ethiopian',
+                language: 'am',
+                date: new Date()
+            });
+            
+            // Date displays
+            dateDisplay1 = new DateDisplay('#date-display-1', {
+                calendar: 'gregorian',
+                language: 'en',
+                date: new Date()
+            });
+            
+            dateDisplay2 = new DateDisplay('#date-display-2', {
+                calendar: 'ethiopian',
+                language: 'am',
+                date: new Date()
+            });
+            
+            // Theme showcase calendar
+            themeCalendar = new ModernCalendar('#theme-calendar', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'purple'
+            });
+            
+            // Initialize DatePickers
+            const gregorianPicker = new ModernDatePicker('#gregorian-picker', {
+                calendar: 'gregorian',
+                language: 'en',
+                theme: 'modern',
+                onSelect: function(date, formatted) {
+                    updateFormOutput('Gregorian', formatted, date);
+                }
+            });
+            
+            const ethiopianPicker = new ModernDatePicker('#ethiopian-picker', {
+                calendar: 'ethiopian',
+                language: 'am',
+                theme: 'green',
+                onSelect: function(date, formatted) {
+                    updateFormOutput('Ethiopian', formatted, date);
+                }
+            });
+            
+            const islamicPicker = new ModernDatePicker('#islamic-picker', {
+                calendar: 'islamic',
+                language: 'en',
+                theme: 'purple',
+                onSelect: function(date, formatted) {
+                    updateFormOutput('Islamic', formatted, date);
+                }
+            });
+        });
+        
+        function updateFormOutput(calendarType, formatted, date) {
+            const output = document.getElementById('form-output');
+            const gregorianDate = date.toLocaleDateString('en-US');
+            output.innerHTML = `
+                <strong>${calendarType} Calendar:</strong> ${formatted}<br>
+                <small>Gregorian equivalent: ${gregorianDate}</small>
+            `;
+        }
+        
+        function changeTheme(theme) {
+            mainCalendar.setTheme(theme);
+        }
+        
+        function changeLanguage(language) {
+            mainCalendar.options.language = language;
+            ethiopianCalendar.options.language = language;
+            mainCalendar.render();
+            ethiopianCalendar.render();
+        }
+        
+        function updateDisplays() {
+            const today = new Date();
+            dateDisplay1.setDate(today);
+            dateDisplay2.setDate(today);
+            ethiopianDateDisplay.setDate(today);
+        }
+        
+        function toggleCalendarType() {
+            const currentType = dateDisplay1.options.calendar;
+            const newType = currentType === 'gregorian' ? 'ethiopian' : 'gregorian';
+            dateDisplay1.setCalendarType(newType);
+        }
+        
+        function cycleThemes() {
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            themeCalendar.setTheme(themes[currentThemeIndex]);
+        }
+        
+        // Test with specific date (6/12/2017)
+        const testDate = new Date(2017, 5, 12); // June 12, 2017
+        console.log('Test date (Gregorian):', testDate.toLocaleDateString());
+        
+        // Set test date in calendars
+        setTimeout(() => {
+            mainCalendar.setDate(testDate);
+            ethiopianCalendar.setDate(testDate);
+        }, 100);
+        
+        // Auto-cycle themes for demo
+        setInterval(() => {
+            cycleThemes();
+        }, 3000);
+    </script>
+</body>
+</html>
